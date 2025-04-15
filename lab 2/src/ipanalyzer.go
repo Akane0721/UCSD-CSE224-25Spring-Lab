@@ -21,7 +21,7 @@ func main() {
 	// Replace the line below and start coding your logic from here.
 
 	cidr := os.Args[1]
-	_, ipnet, err := net.ParseCIDR(cidr)
+	ip, ipnet, err := net.ParseCIDR(cidr)
 	if err != nil {
 		log.Fatalf("Error: %v\n", err)
 	}
@@ -32,18 +32,14 @@ func main() {
 			log.Fatalf("Invalid IP address: %v\n", os.Args[2])
 		}
 
-		if ipnet.Contains(targetIp) {
-			fmt.Println("true")
-		} else {
-			fmt.Println("false")
-		}
+		fmt.Println(ipnet.Contains(targetIp))
 		return
 	}
 
 	fmt.Printf("Analyzing network: %v\n\n", cidr)
 
-	networkAddress := ipnet.IP.Mask(ipnet.Mask)
-	fmt.Printf("Network address: %v\n", networkAddress)
+	networkAddress := ip.Mask(ipnet.Mask)
+	fmt.Printf("Network address: %v\n", networkAddress.String())
 
 	broadcastAddress := make(net.IP, len(networkAddress))
 	copy(broadcastAddress, networkAddress)
@@ -51,10 +47,10 @@ func main() {
 	for i := prefixSize; i < 32; i++ {
 		broadcastAddress[i/8] |= 1 << (7 - i%8)
 	}
-	fmt.Printf("Broadcast address: %v\n", broadcastAddress)
+	fmt.Printf("Broadcast address: %v\n", broadcastAddress.String())
 
-	subnetMask := net.IPv4(ipnet.Mask[0], ipnet.Mask[1], ipnet.Mask[2], ipnet.Mask[3])
-	fmt.Printf("Subnet mask: %v\n", subnetMask)
+	subnetMask := net.IP(ipnet.Mask)
+	fmt.Printf("Subnet mask: %v\n", subnetMask.String())
 
 	usableHosts := math.Pow(2, float64(32-prefixSize)) - 2
 	fmt.Printf("Number of usable hosts: %v\n", usableHosts)
