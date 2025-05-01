@@ -62,8 +62,7 @@ func Ftp(conn net.Conn, dir string) {
 		return
 	}
 	cmd, filename := args[0], args[1]
-	path := filepath.Join(dir, filepath.Base(filename))
-	log.Println(path)
+	path := filepath.Join(dir, filename)
 
 	switch cmd {
 	case "STOR":

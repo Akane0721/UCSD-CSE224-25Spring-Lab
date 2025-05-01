@@ -6,6 +6,7 @@ import (
 	"log"
 	"net"
 	"os"
+	"path/filepath"
 	"strconv"
 	"time"
 )
@@ -32,7 +33,7 @@ func main() {
 
 	switch cmd {
 	case "STOR":
-		conn.Write([]byte("STOR " + filename + "\n"))
+		conn.Write([]byte("STOR " + filepath.Base(filename) + "\n"))
 		upload, err := os.Open(filename)
 		if err != nil {
 			log.Fatalf("Failed to open file: %v\n", filename)
@@ -43,12 +44,12 @@ func main() {
 		log.Printf("Uploaded: %v\n", filename)
 
 	case "RETR":
-		cmd := "RETR " + filename + " "
-		if rate == "" {
-			cmd += "0\n"
-		} else {
-			cmd += rate + "\n"
-		}
+		cmd := "RETR " + filepath.Base(filename) + " " + rate + "\n"
+		// if rate == "" {
+		// 	cmd += "0\n"
+		// } else {
+		// 	cmd += rate + "\n"
+		// }
 		conn.Write([]byte(cmd))
 
 		download, err := os.Create(filename)
