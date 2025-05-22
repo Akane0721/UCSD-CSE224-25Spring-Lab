@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package tritontube;
+
+option go_package = "internal/proto;proto";
+
+service VideoContentAdminService {
+    rpc AddNode(AddNodeRequest) returns (AddNodeResponse);
+    rpc RemoveNode(RemoveNodeRequest) returns (RemoveNodeResponse);
+    rpc ListNodes(ListNodesRequest) returns (ListNodesResponse);
+}
+
+message AddNodeRequest {
+    string node_address = 1;
+}
+message AddNodeResponse {
+    int32 migrated_file_count = 1;
+}
+message RemoveNodeRequest {
+    string node_address = 1;
+}
+message RemoveNodeResponse {
+    int32 migrated_file_count = 1;
+}
+message ListNodesRequest {}
+message ListNodesResponse {
+    repeated string nodes = 1;
+}

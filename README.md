@@ -11,3 +11,5 @@ UCSD 25SP CSE224 Graduate Network Services Labs
 ### Lab 4:  Rate-limited FTP
 
 ### Lab 5&6:  GlobeSort: Distributed Sort with gRPC
+
+### Lab 7:  TritonTube - SQLite & Local File System
