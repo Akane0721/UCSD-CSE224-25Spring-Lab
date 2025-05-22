@@ -9,3 +9,5 @@ UCSD 25SP CSE224 Graduate Network Services Labs
 ### Lab 3:  Networked calculator
 
 ### Lab 4:  Rate-limited FTP
+
+### Lab 5&6:  GlobeSort: Distributed Sort with gRPC

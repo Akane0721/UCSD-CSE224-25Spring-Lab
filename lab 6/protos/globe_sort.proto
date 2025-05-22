@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package globesort;
+option go_package = "globesort/protos/pb;pb";
+
+service NodeService {
+    rpc SendData (DataRequest) returns (DataResponse);
+}
+
+message Record {
+    uint32 len = 1;
+    bytes key = 2;
+    bytes value = 3;
+}
+
+message DataRequest {
+    repeated Record records = 1;
+    bool final = 2;
+}
+
+message DataResponse {
+    bool Ack = 1; 
+}
