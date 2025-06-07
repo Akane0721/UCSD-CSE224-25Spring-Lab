@@ -13,3 +13,5 @@ UCSD 25SP CSE224 Graduate Network Services Labs
 ### Lab 5&6:  GlobeSort: Distributed Sort with gRPC
 
 ### Lab 7:  TritonTube - SQLite & Local File System
+
+### Lab 8:  TritonTube - Distributed Video Storage

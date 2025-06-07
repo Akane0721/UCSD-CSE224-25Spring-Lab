@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package tritontube;
+
+option go_package = "internal/proto;proto";
+
+service VideoContentStorageService {
+    rpc StoreFile(StoreFileRequest) returns (StoreFileResponse);
+    rpc GetFile(GetFileRequest) returns (GetFileResponse);
+    rpc DeleteFile(DeleteFileRequest) returns (DeleteFileResponse);
+}
+
+message StoreFileRequest {
+    string key = 1;
+    bytes data = 2;
+}
+
+message StoreFileResponse {
+    bool success = 1;
+}
+
+message GetFileRequest {
+    string key = 1;
+}
+
+message GetFileResponse {
+    bytes data = 1;
+}
+
+message DeleteFileRequest {
+    string key = 1;
+}
+
+message DeleteFileResponse {
+    bool success = 1;
+}
